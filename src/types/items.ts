@@ -1,5 +1,3 @@
-import { StaticImageData } from "next/image";
-
 export interface Item {
     category: string;
     id: string;
@@ -7,6 +5,6 @@ export interface Item {
     description: string;
     about: string[];
     price: number;
-    gallery: StaticImageData[]
+    gallery: string[]
 
 }

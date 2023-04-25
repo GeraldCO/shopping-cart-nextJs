@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { orange } from "@mui/material/colors";
 
 declare module '@mui/material/styles' {
@@ -16,9 +16,28 @@ declare module '@mui/material/styles' {
   }
   
 
-  const theme = createTheme({
+  const customTheme = createTheme({
+    components:{
+      MuiTabs:{
+        styleOverrides:{
+          flexContainer:{
+            display: 'flex',
+            justifyContent: 'end'
+          }
+        }
+      },
+      MuiToolbar:{
+        styleOverrides:{
+          root:{
+            width: '48%',
+            margin: '0 auto'
+          }
+        }
+      }
+    },
     status: {
       danger: orange[500],
     },
   });
-  
+
+export default customTheme;

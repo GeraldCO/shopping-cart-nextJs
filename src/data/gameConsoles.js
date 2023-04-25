@@ -1,15 +1,3 @@
-import switch1 from '../assets/switch (1).jpg';
-import switch2 from '../assets/switch (2).jpg';
-import switch3 from '../assets/switch (3).jpg';
-import switch6 from '../assets/switch (6).jpg';
-import switch7 from '../assets/switch (7).jpg';
-import switchLite1 from '../assets/swtich-lite (1).jpg';
-import switchLite2 from '../assets/swtich-lite (2).jpg';
-import switchLite3 from '../assets/swtich-lite (3).jpg';
-import switchLite4 from '../assets/swtich-lite (4).jpg';
-import switchLite5 from '../assets/swtich-lite (5).jpg';
-import switchLite6 from '../assets/swtich-lite (6).jpg';
-import switchLite7 from '../assets/swtich-lite (7).jpg';
 import uniqid from 'uniqid';
 
 
@@ -25,7 +13,13 @@ const videGameConsoles = [
                 'In do laborum culpa mollit.'
             ],   
         price: 340,
-        gallery:[ switch1, switch2, switch3, switch6, switch7 ]
+        gallery:[ 
+            '../assets/switch (1).jpg', 
+            '../assets/switch (2).jpg', 
+            '../assets/switch (3).jpg', 
+            '../assets/switch (6).jpg', 
+            '../assets/switch (7).jpg' 
+        ]
     },{
         category: 'video-game-console',
         id : uniqid(),
@@ -37,7 +31,15 @@ const videGameConsoles = [
                 'Amet et sit aliqua ex excepteur do consectetur aliquip excepteur culpa.',
                  'Fugiat voluptate dolore enim reprehenderit culpa irure qui occaecat culpa est aute proident occaecat culpa.'],
         price: 850,
-        gallery:[ switchLite1, switchLite2, switchLite3, switchLite4, switchLite5, switchLite6, switchLite7 ]
+        gallery:[ 
+            '/assets/swtich-lite (1).jpg', 
+            '/assets/swtich-lite (2).jpg', 
+            '/assets/swtich-lite (3).jpg', 
+            '/assets/swtich-lite (4).jpg', 
+            '/assets/swtich-lite (5).jpg', 
+            '/assets/swtich-lite (6).jpg', 
+            '/assets/swtich-lite (7).jpg' 
+        ]
     }
 ];
 

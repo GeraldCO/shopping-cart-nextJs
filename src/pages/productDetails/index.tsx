@@ -1,74 +1,58 @@
-import allCategories from '../../data/allCategories';
-import {useState, useEffect} from 'react'
-import { Item } from '@/types/items';
-import { useRouter } from 'next/router';
-import Image, { StaticImageData } from 'next/image';
+import allCategories from "../../data/allCategories";
+import { Item } from "@/types/items";
+import { useRouter } from "next/router";
+import Carousel from "@/components/carousel/Carousel";
+import DefaultLayout from "@/layouts/DefaulLayout";
+import { useCartContext } from "@/components/Cart/useCartContext";
 
-interface Proxs {
-addItem: (newItem: Item) => void
-}
+type CarouselItem = {
+  image: string;
+};
 
-const ProductDetails = (props: Proxs)=>{
-    const router = useRouter();
-    const { pid } = router.query;
-    const selectedProduct = allCategories.find((product) => product.id === pid);  // this looks for a product using an id, I need to change number one for the variable receive by parameter
-    const [selectedPicture, setSelectedPicture] = useState<StaticImageData | null>(null);
+const ProductDetails = (props: any) => {
+  const router = useRouter();
+  const { pid } = router.query;
+  const selectedProduct = allCategories.find((product) => product.id === pid);
+  const { items, addItem, removeItem, status, showCart } = useCartContext();
 
-    
-    
-    var  {
-        category,
-        id,
-        gallery,
-        name,
-        description,
-        about,
-        price
-    } = selectedProduct!
-    
-    
-    // useEffect(() => {
-    //     setSelectedPicture(gallery[0]);
-    //   },[])
-    
-    return <div>
-        <div> {selectedProduct?.name} </div>
-        
-        <main className="main-container-product">
-            <div className="sidebar sidebar-gallery">
-                <div className="left-gallery">
-                    <ul>
-                        {
-                            selectedProduct!.gallery!.map((picture)=>(<li className="left-picture">
-                                <Image src={picture} alt='product' onClick={()=>setSelectedPicture(picture)}/>
-                            </li>))
-                        }
-                    </ul>
-                </div>
-                <div className="selected-picture">
-                    {/* <Image src={selectedPicture} alt="" /> */}
-                </div>
-            </div>
+  var { category, id, gallery, name, description, about, price } =
+    selectedProduct!;
+
+  var carouselItems: CarouselItem[] = [];
+
+  gallery.map((_pic, index) => {
+    carouselItems.push({
+      image: gallery[index],
+    });
+  });
+
+  const handleRemoveButtonClick = () => {
+    console.log("Button clicked");
+    removeItem('gatito');
+  };
+
+  return (
+      <DefaultLayout>
+        <div>
+          <Carousel items={carouselItems} />
+          <div> {selectedProduct?.name} </div>
+
+          <main className="main-container-product">
             <div className="">
-                <h4>{name ?? "asdf21"}</h4>
-                Price: {price}
-
-                About this item <br />
-                <ul className='about-list'>
-                    {
-                        about.map((item)=>(<li className="left-picture">
-                            {item}
-                        </li>))
-                    }
-                </ul>
-                <button onClick={()=>props.addItem(selectedProduct!)}>
-                    Add to cart 
-                </button>
-
+              <h4>{name ?? ""}</h4>
+              Price: {price}
+              About this item <br />
+              <ul className="about-list">
+                {about.map((item) => (
+                  <li className="left-picture">{item}</li>
+                ))}
+              </ul>
+              <button onClick={handleRemoveButtonClick}>remove</button>
             </div>
-        </main>    
+          </main>
         </div>
-
-}
+      </DefaultLayout>
+  );
+};
 
 export default ProductDetails;

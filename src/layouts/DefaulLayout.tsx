@@ -1,42 +1,30 @@
-import { ReactNode, useState } from 'react';
-import Header from './Header';
-import { Item } from '@/types/items';
+import { ReactNode, useState } from "react";
+import Header from "./Header";
+import { Item } from "@/types/items";
+import { Container } from "@mui/material";
+import Footer from "./Footer";
+import { ThemeProvider } from "@emotion/react";
+import lightTheme from "@/components/themes/lightTheme";
+import ShoppingCart from "@/components/Cart/ShoppingCart";
+import { CartProvider } from "../components/Cart/CartProvider";
 
 type Props = {
-    children: ReactNode;
-}
+  children: ReactNode;
+};
 
-const DefaultLayout = ({ children}: Props) =>{
+const DefaultLayout = ({ children }: Props) => {
+  return (
+    <CartProvider>
+      <Container maxWidth="lg">
+      <ShoppingCart />
+      <Header />
+      <main>{children}</main>
+      <ThemeProvider theme={lightTheme}>
+        <Footer />
+      </ThemeProvider>
+    </Container>
+    </CartProvider>
+  );
+};
 
-    const [cart, setCart] = useState<Item[]>([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [showingCart, setShowingCart ] = useState(false);
-
-    const addItem = (newItem: Item) => {
-        setCart((prevState) => {
-          return[
-            ...prevState,
-            newItem
-          ]
-        });
-    }
-
-    const changeCartVisiility =()=>{
-        setShowingCart(!showingCart);
-        }
-
-    return(
-        <div>
-            <Header
-                cartStatus = {cart} 
-                addItem={addItem}
-                changeCartVisibility={changeCartVisiility}
-            />
-            <main>{children}</main>
-            <footer>Footer</footer>
-        </div>
-    )
-
-}
-
-export default DefaultLayout
+export default DefaultLayout;
